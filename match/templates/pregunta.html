@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pregunta</title>
+    {% load static %}
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-image: url("{% static 'match/images/fondo.jpg' %}");
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            position: absolute;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            padding: 20px 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .opcion {
+            margin-bottom: 15px;
+        }
+        .opcion input[type="radio"] {
+            margin-right: 10px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .btn-back {
+            background-color: #6c757d;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 360px;
+            color: #777;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h2>{{ pregunta.texto }}</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for opcion in pregunta.opciones.all %}
+                    <div class="opcion">
+                        <label>
+                            <input type="radio" name="opcion" value="{{ opcion.id }}" required>
+                            {{ opcion.texto }}
+                        </label>
+                    </div>
+                {% endfor %}
+
+                <div class="btn-container">
+                    {% if pregunta.pregunta_anterior %}
+                        <button type="submit" name="action" value="back" class="btn-back">Anterior</button>
+                    {% endif %}
+                    <button type="submit" name="action" value="next">Continuar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; EdV Verano 2025</p>
+    </div>
+</body>
+</html>

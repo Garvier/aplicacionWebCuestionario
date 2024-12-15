@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ curso.nombre }} - Detalles del Curso</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ curso.imagen_fondo.imagen.url }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 40px 60px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 3em;
+        }
+        p {
+            color: #555;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        a.btn-curso {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.2em;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        a.btn-curso:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ curso.nombre }}</h1>
+        <p>{{ curso.descripcion }}</p>
+        {% if curso.url %}
+            <a href="{{ curso.url }}" target="_blank" class="btn-curso">Ir al curso</a>
+        {% endif %}
+    </div>
+</body>
+</html>
